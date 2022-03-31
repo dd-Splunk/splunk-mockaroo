@@ -68,9 +68,15 @@
       path: path,
       agent: false
     };
+      var httpsParams = {
+      host: 'api.mockaroo.com',
+      port: 443,
+      path: '/api/78dc7ff0?count=100&key=b45bad30',
+      agent: false
+    };  
 
     // Creating http Get request
-    http.get(httpParams, function (res) {
+    https.get(httpsParams, function (res) {
       var body = [];
 
       res.on('data', function(data) {
