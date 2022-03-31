@@ -8,7 +8,7 @@ import os
 import platform
 try:
     from splunk.clilib import cli_common as cli
-except Exception, e:
+except Exception as e:
     print >> sys.stderr, "ERROR Loading splunk.clilib: %s" % e
 
 """
@@ -99,7 +99,7 @@ class AppConf:
             stanza_dict.pop(self.password_store)
             if result.status_code != 200:
                 print >> sys.stderr, "ERROR Error: %s" % result.json()
-        except Exception, e:
+        except Exception as e:
             print >> sys.stderr, "ERROR Error sending message: %s" % e
             return False
         return self.update_config(conf, stanza_dict)
@@ -142,7 +142,7 @@ class AppConf:
             result = requests.get(url=url, headers=self._splunkd_auth_header(), verify=False)
             if result.status_code != 200:
                 print >> sys.stderr, "ERROR Error: %s" % str(result.json())
-        except Exception, e:
+        except Exception as e:
             print >> sys.stderr, "ERROR Error sending message: %s" % e
             return False
         return json.loads(result.text)
