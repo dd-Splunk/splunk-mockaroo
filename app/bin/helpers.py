@@ -1,4 +1,4 @@
-
+from __future__ import print_function 
 __author__ = ''
 
 import sys
@@ -40,7 +40,7 @@ class AppConf:
         if not local:
             if os.path.exists(localconfpath):
                 localconf = cli.readConfFile(localconfpath)
-                for setting, stanza in localconf.items():
+                for setting, stanza in list(localconf.items()):
                     if setting in stanza_dict:
                         stanza_dict[setting].update(stanza)
                     else:
@@ -155,12 +155,12 @@ def dictexpand(item, key=None):
     :return: dict
     """
     pdict = dict()
-    for k, v in item.iteritems():
+    for k, v in list(item.items()):
         if key:
             k = "%s.%s" % (key, k)
         if isinstance(v, dict):
             cdict = dictexpand(v, k)
-            pdict = dict(pdict.items() + cdict.items())
+            pdict = dict(list(pdict.items()) + list(cdict.items()))
         else:
             v = str(v)
             pdict[k] = v
